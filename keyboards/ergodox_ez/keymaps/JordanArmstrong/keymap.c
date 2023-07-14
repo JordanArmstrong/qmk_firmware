@@ -2,21 +2,8 @@
 #include "version.h"
 
 enum custom_keycodes {
-  RGB_SLD = SAFE_RANGE,
-  UK_UCIS
+  RGB_SLD = SAFE_RANGE
 };
-// https://github.com/qmk/qmk_firmware/blob/master/docs/feature_unicode.md
-// Useful (Use UTF-16 codepoints): https://r12a.github.io/app-conversion/
-const ucis_symbol_t ucis_symbol_table[] = UCIS_TABLE(
-    UCIS_SYM("poop", 0x1F4A9),                // 💩
-    UCIS_SYM("rofl", 0x1F923),                // 🤣
-    UCIS_SYM("ca", 0x1F1E8, 0x1F1E6),       // 🇨🇦
-    UCIS_SYM("look", 0x0CA0, 0x005F, 0x0CA0),  // ಠ_ಠ
-    UCIS_SYM("flip", 0x0028, 0x30CE, 0x0CA0, 0x76CA, 0x0CA0, 0x0029, 0x30CE, 0x5F61, 0x253B, 0x2501, 0x253B), // (ノಠ益ಠ)ノ彡┻━┻
-    UCIS_SYM("unflip", 0x252C, 0x2500, 0x252C, 0x30CE, 0x0028, 0x0020, 0x00BA, 0x0020, 0x005F, 0x0020, 0x00BA, 0x30CE, 0x0029) // ┬─┬ノ( º _ ºノ)
-);
-
-
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -67,8 +54,8 @@ _______, _______, _______,     _______,     _______,                            
 ),
 
 [2] = LAYOUT_ergodox_pretty(
-_______, UC_LINX,    UC_WINC,     UC_MAC,     _______, _______, _______,      QK_BOOT, _______, _______            , _______          , _______        , _______            , _______            ,
-_______, _______,    _______,   KC_MS_UP,     _______, _______, _______,      _______, _______, UK_UCIS            , _______          , _______        , _______            , _______            ,
+_______, _______,    _______,    _______,     _______, _______, _______,      QK_BOOT, _______, _______            , _______          , _______        , _______            , _______            ,
+_______, _______,    _______,   KC_MS_UP,     _______, _______, _______,      _______, _______, _______            , _______          , _______        , _______            , _______            ,
 _______, _______, KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, _______,                        _______, _______            , _______          , _______        , _______            , KC_MEDIA_PLAY_PAUSE,
 _______, _______,    _______,    _______,     _______, _______, _______,      _______, _______, _______            , _______          , _______        , _______            , _______            ,
 _______, _______,    _______, KC_MS_BTN1,  KC_MS_BTN2,                                          KC_MEDIA_PREV_TRACK, KC_AUDIO_VOL_DOWN, KC_AUDIO_VOL_UP, KC_MEDIA_NEXT_TRACK, KC_AUDIO_MUTE      ,
@@ -87,11 +74,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case RGB_SLD:
       if (record->event.pressed) {
         rgblight_mode(1);
-      }
-      return false;
-    case UK_UCIS:
-      if (record->event.pressed) {
-        ucis_start();
       }
       return false;
   }
